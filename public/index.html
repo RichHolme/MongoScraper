@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Scraping With Mongoose</title>
+
+    <link rel="stylesheet" type="text/css" href="./style.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"> 
+
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand">News Scraper</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Saved Articles <span class="sr-only">(current)</span></a>
+            </li>
+            <button id="scrapeBtn" class="btn btn-outline-danger my-2 my-sm-0">Scrape New Articles</button>         
+           </ul>
+        </div>
+      </nav>
+
+    <div class="row">
+      <img id="backgroundImg" src="./images/news.jpg">
+    </div>
+    <div>
+      <!-- <div id="articlesHeader" align="center">Articles</div> -->
+      <div id="row">
+        <div id="articles"></div>
+        <!-- <div id="link"></div> -->
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

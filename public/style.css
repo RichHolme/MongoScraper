@@ -1,0 +1,61 @@
+body { 
+  overflow-x: hidden;
+ }
+      #wrapper {
+        /*width: 960px;
+        margin-left: auto;
+        margin-right: auto;*/
+        padding-top: 5%;
+      }
+      #articles {
+        /*display: inline-block;
+        overflow: auto;
+        width: 60%;
+        height: 700px;*/
+      }
+      #notes {
+        float: right;
+        width: 30%;
+      }
+      textarea, input {
+        display: block;
+        width: 100%;
+        background-color: #FCF5C7;
+      }
+      input {
+        height: 36px;
+        font-size: 24px;
+      }
+      textarea {
+        height: 200px;
+        font-size: 18px;
+      }
+#backgroundImg{
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#articleList{
+  width: 97%;
+}
+
+#saveBtn{
+  float: right;
+  margin-top: 0px !important;
+}
+
+#title{
+  font-size: 30px;
+}
+/*#articlesHeader{
+  background-color: #7997a1;
+  text-align: center;
+  color: white;
+  font-size: 30px;
+}*/
+
+/*.title{
+  color: white;
+  font-style: 30px;
+  background-color: #7997a1;
+}*/
