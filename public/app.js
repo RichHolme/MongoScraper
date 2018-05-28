@@ -24,11 +24,26 @@ $(document).on("click", "#scrapeBtn", function() {
 
 $(document).on("click", ".btn-danger", function() {
   // var thisId = $(this).attr("data-id");
-  var title = $(this).parent().text();
-  title = title.slice(0, -12);
-  console.log(title);
+  var title = $(this).parent().parent();
+  var div = title.parent();
+  // title = title.slice(0, -12);
+  // console.log(title);
   // var link = $(this).parent().children().text();
-  console.log($(this).parent().id("#link").text());
+  // console.log($(this).parent().id("#link").text());
+  // var div = $(this).parent();
+  // console.log($(this).html());
+
+  title.each(function(index, value) {
+        
+        currentValue = $(value).text();
+        console.log(currentValue);
+        // if( currentName.toUpperCase().indexOf(searchString.toUpperCase()) > -1) {
+        //    $(value).show();
+        // } else {
+        //     $(value).hide();
+        // }
+        
+    });
   // $.ajax({
   //   method: "GET",
   //   url: "/save"
