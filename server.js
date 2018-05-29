@@ -69,12 +69,31 @@ app.get("/scrape", function(req, res) {
   });
 });
 
-app.get("/saveOne", function(req, res) {
-  
+app.post("/saveOne", function(req, res) {
+
   db.Saved.create(req.body)
     .then(function(dbSaved) {
-     console.log('saved');
-      // res.json(dbSaved);
+  
+    })
+    .catch(function(err) {
+
+      res.json(err);
+    });
+});
+
+
+app.get("/saved", function(req, res) {
+  // console.log('called');
+  res.sendFile(__dirname + '/public/saved.html');
+
+});
+
+app.get("/savedPopulate", function(req, res) {
+
+  db.Saved.find({})
+    .then(function(dbSaved) {
+      // console.log(dbSaved);
+      res.json(dbSaved);
     })
     .catch(function(err) {
 

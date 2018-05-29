@@ -9,6 +9,38 @@ $.getJSON("/articles", function(data) {
   }
 });
 
+$(document).on("click", "#savedHome", function() {
+  
+  // $.get("/saved", function(data) {
+    
+  // });
+  // console.log('here');
+  $.ajax({
+    method: "GET",
+    url: "/saved"
+  })
+    // With that done, add the note information to the page
+    .then(function(data) {
+      
+      // populate();
+      
+    })
+
+  
+});
+
+// function populate(){
+//   console.log('called');
+//   $.get("/savedPopulate", function(data) {
+//         // console.log('called');
+//         // $("#saved").empty();
+//         // $("#saved").empty();
+//         // for (var i = 0; i < data.length; i++) {
+//         //   $("#articles").append("<ul id='articleList'><li id='title' class='list-group-item active' data-id='" + data[i]._id + "'>" + data[i].title + "<button id='saveBtn' class='btn btn-danger'>Save Article</button></li><li id='link' class='list-group-item'>" + data[i].link + "</li></ul>");
+//         // }
+//   });
+// }
+
 $(document).on("click", "#scrapeBtn", function() {
   $.ajax({
     method: "GET",
@@ -22,6 +54,7 @@ $(document).on("click", "#scrapeBtn", function() {
     })
 });
 
+// route to save an article
 $(document).on("click", ".btn-danger", function() {
  
   var div = $(this).parent().parent();
@@ -37,7 +70,7 @@ $(document).on("click", ".btn-danger", function() {
   });
 
   $.ajax({
-    method: "GET",
+    method: "POST",
     url: "/saveOne",
     data: article
   })
