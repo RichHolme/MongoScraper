@@ -58,6 +58,13 @@ body {
 #title{
   font-size: 28px;
 }
+
+#notes{
+  border: 1px solid lightgrey;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
 /*#articlesHeader{
   background-color: #7997a1;
   text-align: center;
