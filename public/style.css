@@ -44,8 +44,19 @@ body {
   margin-top: 0px !important;
 }
 
+#noteBtn{
+  float: right;
+  margin-top: 0px !important;
+}
+
+#deleteBtn{
+  float: right;
+  margin-top: 0px !important;
+  margin-left: 10px;
+}
+
 #title{
-  font-size: 30px;
+  font-size: 28px;
 }
 /*#articlesHeader{
   background-color: #7997a1;
