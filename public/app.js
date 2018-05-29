@@ -23,37 +23,27 @@ $(document).on("click", "#scrapeBtn", function() {
 });
 
 $(document).on("click", ".btn-danger", function() {
-  // var thisId = $(this).attr("data-id");
-  var title = $(this).parent().parent();
-  var div = title.parent();
-  // title = title.slice(0, -12);
-  // console.log(title);
-  // var link = $(this).parent().children().text();
-  // console.log($(this).parent().id("#link").text());
-  // var div = $(this).parent();
-  // console.log($(this).html());
+ 
+  var div = $(this).parent().parent();
 
-  title.each(function(index, value) {
+  var article = {};
+
+  div.each(function(index, value) {  
+    currentValue = $(value).text();
+
+    article.title = currentValue.split('Save')[0];
+    article.link = currentValue.split('Article')[1];
         
-        currentValue = $(value).text();
-        console.log(currentValue);
-        // if( currentName.toUpperCase().indexOf(searchString.toUpperCase()) > -1) {
-        //    $(value).show();
-        // } else {
-        //     $(value).hide();
-        // }
-        
-    });
-  // $.ajax({
-  //   method: "GET",
-  //   url: "/save"
-  // })
-  //   // With that done, add the note information to the page
-  //   .then(function(data) {
-  //     console.log('saved');
-  //     // res.json(data);
-  //     // location.reload();
-  //   })
+  });
+
+  $.ajax({
+    method: "GET",
+    url: "/saveOne",
+    data: article
+  })
+    .then(function(data) {
+      console.log('saved');
+    })
 });
 
 // Whenever someone clicks a p tag
