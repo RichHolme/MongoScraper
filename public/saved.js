@@ -19,7 +19,9 @@ $( document ).ready(function() {
 		  	console.log(data);
 		  	// for (var i = 0; i < data.note.length; i++) {
 		  		// console.log(data);
-		  		$("#notes").text(data.note.note);
+		  		var xbtn = $("<button id='xbtn' class='btn btn-danger'>X</button>");
+		  		$("#notes").append(data.note.note);
+		  		$("#notes").append(xbtn);
 		  	// }
 		  }
 		 
@@ -29,6 +31,10 @@ $( document ).ready(function() {
     	$(".modal-title").text('Notes For Article ' + noteId);
     	$("#saveNote").attr('data-id', noteId);
   	    $(".modal").show();
+	});
+
+	$(document).on("click", "#xbtn", function() {
+    	$("#notes").empty();
 	});
 
 	$(document).on("click", "#saveNote", function() {
