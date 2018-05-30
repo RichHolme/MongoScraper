@@ -35,6 +35,12 @@ $( document ).ready(function() {
 
 	$(document).on("click", "#xbtn", function() {
     	$("#notes").empty();
+    	$(".modal").hide();
+	});
+
+	$(document).on("click", ".closeBtn", function() {
+    	// $("#notes").empty();
+    	$(".modal").hide();
 	});
 
 	$(document).on("click", "#saveNote", function() {
