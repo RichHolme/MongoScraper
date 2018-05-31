@@ -12,15 +12,15 @@ $( document ).ready(function() {
     	var noteId = $(this).parent().attr('data-id');
     	console.log(noteId);
     	$.get("/articles/" + noteId, function(data) {
-		  
-		  if (data == null) {
+		  // console.log(data);
+		  if (data.note == undefined) {
 		  	$("#notes").text('No notes for this article.');
 		  }else{
-		  	console.log(data);
+		  	console.log(data.note);
 		  	// for (var i = 0; i < data.note.length; i++) {
-		  		// console.log(data);
-		  		var xbtn = $("<button id='xbtn' class='btn btn-danger'>X</button>");
-		  		$("#notes").append(data.note.note);
+		  		// console.log(data.note._id);
+		  		var xbtn = $("<button data-id='"+data.note._id+"' id='xbtn' class='btn btn-danger'>X</button>");
+		  		$("#notes").html(data.note.note);
 		  		$("#notes").append(xbtn);
 		  	// }
 		  }
@@ -33,10 +33,10 @@ $( document ).ready(function() {
   	    $(".modal").show();
 	});
 
-	$(document).on("click", "#xbtn", function() {
-    	$("#notes").empty();
-    	$(".modal").hide();
-	});
+	// $(document).on("click", "#xbtn", function() {
+ //    	$("#notes").empty();
+ //    	$(".modal").hide();
+	// });
 
 	$(document).on("click", ".closeBtn", function() {
     	// $("#notes").empty();
@@ -81,4 +81,23 @@ $( document ).ready(function() {
 		    
 		})
 	});
+
+	$(document).on("click", "#xbtn", function() {
+    	var artId = $(this).attr('data-id');
+    	console.log(artId);
+    	// $(this).parent().parent().hide();
+    	$(this).parent().hide();
+    	$.ajax({
+		    method: "DELETE",
+		    url: "/noteDelete:" + artId
+		})
+		// With that done, add the note information to the page
+		.then(function(data) {
+		      
+		    // populate();
+		    // console.log('deleted');
+		    
+		})
+	});
+
 });

@@ -37,7 +37,7 @@ $(document).on("click", "#scrapeBtn", function() {
 });
 
 // route to save an article
-$(document).on("click", ".btn-danger", function() {
+$(document).on("click", ".saveBtn", function() {
  
   var div = $(this).parent().parent();
   // var id = $(this).parent().attr('data-id');

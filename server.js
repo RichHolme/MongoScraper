@@ -157,10 +157,23 @@ app.post("/articles/:id", function(req, res) {
 });
 
 app.delete("/delete:id", function(req, res) {
-  console.log(req.params.id);
+  // console.log(req.params.id);
   var id = req.params.id.split(":")[1];
   db.Saved.deleteOne({_id: id})
     .then(function(dbNote) {
+      // console.log('deleted');
+      console.log('delete saved called')
+      // location.reload();
+    })
+});
+
+app.delete("/noteDelete:id", function(req, res) {
+  console.log(req.params.id);
+  var id = req.params.id.split(":")[1];
+  console.log(id);
+  db.Note.deleteOne({_id: id})
+    .then(function(dbNote) {
+      console.log('deletNote has been called')
       console.log('deleted');
       // location.reload();
     })
