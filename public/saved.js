@@ -10,19 +10,17 @@ $( document ).ready(function() {
 
     $(document).on("click", "#noteBtn", function() {
     	var noteId = $(this).parent().attr('data-id');
-    	console.log(noteId);
+    	// console.log(noteId);
     	$.get("/articles/" + noteId, function(data) {
 		  // console.log(data);
 		  if (data.note == undefined) {
 		  	$("#notes").text('No notes for this article.');
 		  }else{
-		  	console.log(data.note);
-		  	// for (var i = 0; i < data.note.length; i++) {
-		  		// console.log(data.note._id);
+		  	
 		  		var xbtn = $("<button data-id='"+data.note._id+"' id='xbtn' class='closeBtn btn btn-danger'>X</button>");
 		  		$("#notes").html(data.note.note);
 		  		$("#notes").append(xbtn);
-		  	// }
+		  	
 		  }
 		 
 		});
@@ -33,11 +31,6 @@ $( document ).ready(function() {
   	    $(".modal").show();
 	});
 
-	// $(document).on("click", "#xbtn", function() {
- //    	$("#notes").empty();
- //    	$(".modal").hide();
-	// });
-
 	$(document).on("click", ".closeBtn", function() {
     	// $("#notes").empty();
     	$(".modal").hide();
@@ -46,10 +39,7 @@ $( document ).ready(function() {
 
 	$(document).on("click", "#saveNote", function() {
 		var artId = $(this).attr('data-id');
-		console.log(artId);
-		// var note = {};
-		// note.note = $("#noteData").val();
-		// console.log($("#noteData").val());
+
 		var noteVal = $("#noteData").val();
 		$("#noteData").val('');
 		$.ajax({
@@ -64,13 +54,13 @@ $( document ).ready(function() {
 		      
 		    // populate();
 		    $("#noteData").empty();
-		    console.log('finished');
+		    // console.log('finished');
 		})
 	});
 
 	$(document).on("click", "#deleteBtn", function() {
     	var artId = $(this).parent().attr('data-id');
-    	console.log(artId);
+    	// console.log(artId);
     	$(this).parent().parent().hide();
     	$.ajax({
 		    method: "DELETE",
@@ -78,8 +68,7 @@ $( document ).ready(function() {
 		})
 		// With that done, add the note information to the page
 		.then(function(data) {
-		      
-		    // populate();
+
 		    console.log('deleted');
 		    
 		})
@@ -87,19 +76,14 @@ $( document ).ready(function() {
 
 	$(document).on("click", "#xbtn", function() {
     	var artId = $(this).attr('data-id');
-    	console.log(artId);
-    	// $(this).parent().parent().hide();
-    	// $(this).parent().hide();
+  
     	$.ajax({
 		    method: "DELETE",
 		    url: "/noteDelete:" + artId
 		})
 		// With that done, add the note information to the page
 		.then(function(data) {
-		      
-		    // populate();
-		    // console.log('deleted');
-		    
+
 		})
 	});
 
