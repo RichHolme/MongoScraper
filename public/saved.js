@@ -64,4 +64,21 @@ $( document ).ready(function() {
 		    console.log('finished');
 		})
 	});
+
+	$(document).on("click", "#deleteBtn", function() {
+    	var artId = $(this).parent().attr('data-id');
+    	console.log(artId);
+    	$(this).parent().parent().hide();
+    	$.ajax({
+		    method: "DELETE",
+		    url: "/delete:" + artId
+		})
+		// With that done, add the note information to the page
+		.then(function(data) {
+		      
+		    // populate();
+		    console.log('deleted');
+		    
+		})
+	});
 });

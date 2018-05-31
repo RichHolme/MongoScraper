@@ -156,6 +156,16 @@ app.post("/articles/:id", function(req, res) {
     });
 });
 
+app.delete("/delete:id", function(req, res) {
+  console.log(req.params.id);
+  var id = req.params.id.split(":")[1];
+  db.Saved.deleteOne({_id: id})
+    .then(function(dbNote) {
+      console.log('deleted');
+      // location.reload();
+    })
+});
+
 // Start the server
 app.listen(PORT, function() {
   console.log("App running on port " + PORT + "!");
