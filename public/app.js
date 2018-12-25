@@ -31,7 +31,8 @@ $(document).on("click", "#scrapeBtn", function() {
     .then(function(data) {
       console.log('scraped');
       // res.json(data);
-      window.location.reload();
+      // window.location.reload();
+      setTimeout(function(){ window.location.reload() }, 1500);
     })
 });
 

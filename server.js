@@ -35,8 +35,8 @@ mongoose.connect(MONGODB_URI);
 
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
+  
   // First, we grab the body of the html with request
-  console.log('here');
   axios.get("http://www.foxnews.com/politics.html").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
@@ -54,21 +54,39 @@ app.get("/scrape", function(req, res) {
         .children("a")
         .attr("href");
 
-      // Create a new Article using the `result` object built from scraping
-      db.Article.create(result)
-        .then(function(dbArticle) {
-          // View the added result in the console
-          console.log(dbArticle);
-        })
-        .catch(function(err) {
-          // If an error occurred, send it to the client
-          return res.json(err);
-        });
+        console.log('result')
+        console.log(result.title)
+
+      db.Article.findOne({ title: result.title })
+      .then(function(dbArticle) {
+        console.log(dbArticle)
+        // res.json(dbArticle);
+        if(dbArticle == null){
+          // Create a new Article using the `result` object built from scraping
+          db.Article.create(result)
+            .then(function(dbArticle) {
+              // View the added result in the console
+              console.log(dbArticle);
+            })
+            .catch(function(err) {
+              // If an error occurred, send it to the client
+              res.json(err);
+            });
+        }
+      })
+      .catch(function(err) {
+        // If an error occurred, send it to the client
+        res.json(err);
+      });
+
     });
 
-    // If we were able to successfully scrape and save an Article, send a message to the client
-    res.send("Scrape Complete");
+    res.send("Scrape Complete")
+
   });
+
+  
+
 });
 
 app.post("/saveOne", function(req, res) {
