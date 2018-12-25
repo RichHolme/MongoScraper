@@ -36,57 +36,83 @@ mongoose.connect(MONGODB_URI);
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   
-  // First, we grab the body of the html with request
-  axios.get("http://www.foxnews.com/politics.html").then(function(response) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
-    var $ = cheerio.load(response.data);
-    // console.log(response.data);
-    // Now, we grab every h2 within an article tag, and do the following:
-    $("h2.title").each(function(i, element) {
-      // Save an empty result object
-      var result = {};
+  // Grab every document in the Articles collection
+  db.Article.find({})
+    .then(function(dbArticles) {
+      // If we were able to successfully find Articles, send them back to the client
+      // res.json(dbArticle);
 
-      // Add the text and href of every link, and save them as properties of the result object
-      result.title = $(this)
-        .children("a")
-        .text();
-      result.link = $(this)
-        .children("a")
-        .attr("href");
+       // First, we grab the body of the html with request
+      axios.get("http://www.foxnews.com/politics.html").then(function(response) {
+        // Then, we load that into cheerio and save it to $ for a shorthand selector
+        var $ = cheerio.load(response.data);
+        // console.log(response.data);
+        // Now, we grab every h2 within an article tag, and do the following:
+        $("h4.title").each(function(i, element) {
+          // Save an empty result object
+          var result = {};
 
-        console.log('result')
-        console.log(result.title)
+          // Add the text and href of every link, and save them as properties of the result object
+          result.title = $(this)
+            .children("a")
+            .text();
+          result.link = $(this)
+            .children("a")
+            .attr("href");
 
-      db.Article.findOne({ title: result.title })
-      .then(function(dbArticle) {
-        console.log(dbArticle)
-        // res.json(dbArticle);
-        if(dbArticle == null){
-          // Create a new Article using the `result` object built from scraping
-          db.Article.create(result)
-            .then(function(dbArticle) {
-              // View the added result in the console
-              console.log(dbArticle);
-            })
-            .catch(function(err) {
-              // If an error occurred, send it to the client
-              res.json(err);
-            });
-        }
+          // console.log('result')
+          // console.log(result.title);
+          // console.log(result.link);
+
+          if(result.link != undefined){
+
+            var found = false;
+            if(!result.link.toString().includes('http')){
+              // var res = str.replace("Microsoft", "W3Schools");
+              // console.log('-----------------------------------------------')
+              // console.log('found bad link');
+              // console.log(result.link)
+              result.link = 'https://www.foxnews.com' + result.link 
+              // console.log(result.link)
+              // found = true;
+              // break;
+            }else{
+              found = true
+            }
+
+            
+            for(var i = 0; i < dbArticles.length; i++) {
+              if (dbArticles[i].title == result.title) {
+                  found = true;
+                  break;
+              }
+            }
+
+            if(!found){
+              // Create a new Article using the `result` object built from scraping
+              db.Article.create(result)
+                .then(function(article) {
+                  // View the added result in the console
+                  // console.log(article);
+                })
+                .catch(function(err) {
+                  // If an error occurred, send it to the client
+                  res.json(err);
+                });
+              }
+            }
+        });
+
+        // res.send("Scrape Complete")
       })
-      .catch(function(err) {
-        // If an error occurred, send it to the client
-        res.json(err);
-      });
-
+      .catch(function(err){
+        console.log(err)
+      })
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
     });
-
-    res.send("Scrape Complete")
-
-  });
-
-  
-
 });
 
 app.post("/saveOne", function(req, res) {
