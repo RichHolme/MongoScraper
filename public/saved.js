@@ -1,7 +1,8 @@
 $( document ).ready(function() {
     $.get("/savedPopulate", function(data) {
         // console.log('called');
-        // $("#saved").empty();
+		// $("#saved").empty();
+		console.log(data)
         $("#saved").empty();
         for (var i = 0; i < data.length; i++) {
           $("#saved").append("<ul id='articleList'><li id='title' class='list-group-item active' data-id='" + data[i]._id + "'>" + data[i].title + "<button id='deleteBtn' class='btn btn-danger'><i class='fa fa-trash'></i></button><button id='noteBtn' class='btn btn-success'>Add Note</button></li><li id='link' class='list-group-item'>" + data[i].link + "</li></ul>");

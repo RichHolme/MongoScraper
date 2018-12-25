@@ -14,10 +14,10 @@ $(document).on("click", "#savedHome", function() {
     method: "GET",
     url: "/saved"
   })
-    // With that done, add the note information to the page
-    .then(function(data) {
-      
-    })
+  // With that done, add the note information to the page
+  .then(function(data) {
+    // console.log(data)
+  })
 
   
 });
@@ -28,12 +28,31 @@ $(document).on("click", "#scrapeBtn", function() {
     url: "/scrape"
   })
   .then(function(data) {
-    // console.log('scraped');
+    console.log('scraped');
     // res.json(data);
     // window.location.reload();
+    $("#modaltxt").empty()
+    if(data == 0){
+      $("#modaltxt").append('<p>' + data + ' new articles were added. </p>');
+      $("#modaltxt").append('<p>All articles found have already been scraped</p>')
+    }else{
+      $("#modaltxt").text(data + ' new articles were added')
+    }
 
+    // $("#myModal").modal('show')
+    // $('#myModal').modal('show')
+    $(".modal").show();
+    // $('#myModal').modal('show');s
+
+    // setTimeout(function() {
+    //   $('#myModal').modal('hide');
+    // }, 1000);
+    // setTimeout(function(){ window.location.reload() }, 1000);
+    // $("#getCodeModal").modal('hide');
+    console.log(data)
     // the findone check slowed things down so i put this delay on the reload
-    setTimeout(function(){ window.location.reload() }, 500);
+    setTimeout(function(){ window.location.reload() }, 3000);
+    // window.location.reload()
   })
   .catch(function(err) {
     // If an error occurred, send it to the client
@@ -66,3 +85,8 @@ $(document).on("click", "#saveBtn", function() {
     })
 });
 
+$(document).on("click", ".closeBtn", function() {
+  // $("#notes").empty();
+  $(".modal").hide();
+  // $("#noteData").html('');
+});

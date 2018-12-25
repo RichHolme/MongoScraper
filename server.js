@@ -48,8 +48,11 @@ app.get("/scrape", function(req, res) {
         var $ = cheerio.load(response.data);
         // console.log(response.data);
         // Now, we grab every h2 within an article tag, and do the following:
+        let stored = $('h4.title').length;
+        console.log($('h4.title').length);
         $("h4.title").each(function(i, element) {
-          // Save an empty result object
+
+          
           var result = {};
 
           // Add the text and href of every link, and save them as properties of the result object
@@ -60,50 +63,46 @@ app.get("/scrape", function(req, res) {
             .children("a")
             .attr("href");
 
-          // console.log('result')
-          // console.log(result.title);
-          // console.log(result.link);
-
           if(result.link != undefined){
 
             var found = false;
             if(!result.link.toString().includes('http')){
-              // var res = str.replace("Microsoft", "W3Schools");
-              // console.log('-----------------------------------------------')
-              // console.log('found bad link');
-              // console.log(result.link)
               result.link = 'https://www.foxnews.com' + result.link 
-              // console.log(result.link)
-              // found = true;
-              // break;
             }else{
-              found = true
+              found = true;
+              stored--;
             }
 
-            
-            for(var i = 0; i < dbArticles.length; i++) {
-              if (dbArticles[i].title == result.title) {
+            for(var j = 0; j < dbArticles.length; j++) {
+              if (dbArticles[j].title == result.title) {
                   found = true;
+                  stored--;
                   break;
               }
             }
 
             if(!found){
-              // Create a new Article using the `result` object built from scraping
               db.Article.create(result)
                 .then(function(article) {
-                  // View the added result in the console
-                  // console.log(article);
                 })
                 .catch(function(err) {
-                  // If an error occurred, send it to the client
                   res.json(err);
                 });
               }
             }
-        });
+            
+            // console.log(i)
+            if(i == $('h4.title').length - 1){
+              callback()
+            }
+        })
+        
+        function callback(){
+            console.log('callback called')
+            res.json(stored - 1)
+        }
 
-        // res.send("Scrape Complete")
+        // res.json(stored)
       })
       .catch(function(err){
         console.log(err)
