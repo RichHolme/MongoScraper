@@ -45,9 +45,32 @@ textarea {
   height: 200px;
   font-size: 18px;
 }
-#backgroundImg{
+/* #backgroundImg{ */
+  /* margin: auto;
   width: 100%;
-  margin-bottom: 20px;
+  height: 100%;
+  /* margin-bottom: 30px; */
+  /* border: solid 1px black; */
+  /* box-shadow: 10px 5px 20px 2px lightslategrey; */ 
+/* }  */
+
+#titleHead{
+  font-size: 60px;
+  /* background-color: #f8f9fa; */
+  /* width: 35%; */
+  margin: auto;
+  padding-bottom: 1%;
+  margin-top: -2%;
+}
+
+.jumbotron {
+  background-image: url("./images/newspapers.jpg");
+  background-size: cover;
+  /* background-size: 100%; */
+  /* color: white; */
+  font-family: "Cormorant SC";
+  height: 500px;
+  box-shadow: 10px 5px 20px 2px lightslategrey;
 }
 
 #articleList{
@@ -76,6 +99,10 @@ textarea {
   font-size: 28px;
 }
 
+#link{
+  font-size: 20px;
+}
+
 #notes{
   border: 1px solid lightgrey;
   width: 100%;
@@ -86,15 +113,27 @@ textarea {
 #xbtn{
   float: right;
 }
-/*#articlesHeader{
-  background-color: #7997a1;
-  text-align: center;
-  color: white;
-  font-size: 30px;
-}*/
 
-/*.title{
-  color: white;
-  font-style: 30px;
-  background-color: #7997a1;
-}*/
+#scrapeBtn{
+  font-size: 20px;
+}
+
+.nav-link{
+  font-size: 18px;
+}
+
+.navbar-brand{
+  font-size: 24px !important;
+  padding-top: 0 !important;
+}
+
+.navbar{
+  padding: 1.2rem 1.2rem !important;
+}
+
+.pageLogo{
+  margin: auto;
+  text-align: center;
+  position: absolute;
+  top: 0;
+}
