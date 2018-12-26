@@ -37,7 +37,32 @@
       </div>
     </div>
 
-    <div class="modal" tabindex="-1" role="dialog">
+    <div id="save" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="save-modal-title modal-title"></h5>
+            <button type="button" class="closeBtn close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>  
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Add note</label>
+                <textarea id="noteData" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button id="saveNote" type="button" class="btn closeBtn btn-primary">Save note</button>
+            <button type="button" class="btn closeBtn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="notesModal" class="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -48,12 +73,6 @@
           </div>
           <div class="modal-body">
             <div id="notes"></div>
-            <form>  
-              <div class="form-group">
-                <label for="exampleFormControlTextarea1">Add note</label>
-                <textarea id="noteData" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-              </div>
-            </form>
           </div>
           <div class="modal-footer">
             <button id="saveNote" type="button" class="btn closeBtn btn-primary">Save note</button>

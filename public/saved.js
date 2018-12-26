@@ -12,24 +12,24 @@ $( document ).ready(function() {
     $(document).on("click", "#noteBtn", function() {
     	var noteId = $(this).parent().attr('data-id');
     	// console.log(noteId);
-    	$.get("/articles/" + noteId, function(data) {
-		  // console.log(data);
-		  if (data.note == undefined) {
-		  	$("#notes").text('No notes for this article.');
-		  }else{
+    	// $.get("/articles/" + noteId, function(data) {
+		//   console.log(data);
+		//   if (data.note == undefined) {
+		//   	$("#notes").text('No notes for this article.');
+		//   }else{
 		  	
-		  		var xbtn = $("<button data-id='"+data.note._id+"' id='xbtn' class='closeBtn btn btn-danger'>X</button>");
-		  		$("#notes").html(data.note.note);
-		  		$("#notes").append(xbtn);
+		//   		var xbtn = $("<button data-id='"+data.note._id+"' id='xbtn' class='closeBtn btn btn-danger'>X</button>");
+		//   		$("#notes").html(data.note.note);
+		//   		$("#notes").append(xbtn);
 		  	
-		  }
+		//   }
 		 
-		});
+		// });
 
     	// var noteId = $(this).parent().attr('data-id');
-    	$(".modal-title").text('Notes For Article ' + noteId);
+    	$(".save-modal-title").text('Notes For Article ' + noteId);
     	$("#saveNote").attr('data-id', noteId);
-  	    $(".modal").show();
+  	    $("#save").show();
 	});
 
 	$(document).on("click", ".closeBtn", function() {
@@ -52,10 +52,13 @@ $( document ).ready(function() {
 		})
 		// With that done, add the note information to the page
 		.then(function(data) {
-		      
+		      console.log(data)
 		    // populate();
-		    $("#noteData").empty();
-		    // console.log('finished');
+			$("#noteData").empty();
+			
+			// $("#")<button id='noteBtn' class='btn btn-success'>Add Note</button>
+			// console.log('finished');
+			$("#title").attr("data-id", artId).append("<button id='viewNotes' class='btn btn-info'>Notes</button>")
 		})
 	});
 

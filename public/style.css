@@ -51,9 +51,11 @@ textarea {
   margin-top: 0px !important;
 }
 
-#noteBtn{
+#noteBtn,
+#viewNotes{
   float: right;
   margin-top: 0px !important;
+  margin-left: 10px;
 }
 
 #deleteBtn{
