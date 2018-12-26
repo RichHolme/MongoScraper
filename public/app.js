@@ -67,10 +67,12 @@ $(document).on("click", "#saveBtn", function() {
   var article = {};
 
   div.each(function(index, value) {  
+    console.log(div)
+    // console.log($(value).children)
     currentValue = $(value).text();
-
+    let link = $(this).children("#link").children('a').attr('href')
     article.title = currentValue.split('Save')[0];
-    article.link = currentValue.split('Article')[1];
+    article.link = link;
     // article.id = $(this).parent().attr('data-id');
         
   });

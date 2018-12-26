@@ -8,6 +8,14 @@ body {
    margin-top: 3%;
  }
 
+.note{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding: 3% 2% 6% 2%;
+  border: solid 1px gray;
+
+}
+
 #wrapper {
   /*width: 960px;
   margin-left: auto;

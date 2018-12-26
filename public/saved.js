@@ -6,9 +6,9 @@ $( document ).ready(function() {
         $("#saved").empty();
         for (var i = 0; i < data.length; i++) {
 			if(data[i].note.length > 0){
-				$("#saved").append("<ul id='articleList'><li id='"+data[i]._id+"' class='title list-group-item active' data-id='" + data[i]._id + "'>" + data[i].title + "<button id='deleteBtn' class='btn btn-danger'><i class='fa fa-trash'></i></button><button id='noteBtn' class='btn btn-success'>Add Note</button><button data-id='" + data[i]._id + "' id='viewNotes' class='btn btn-info'>Notes</button></li><li id='link' class='list-group-item'>" + data[i].link + "</li></ul>");
+				$("#saved").append("<ul id='articleList'><li id='"+data[i]._id+"' class='title list-group-item active' data-id='" + data[i]._id + "'>" + data[i].title + "<button id='deleteBtn' class='btn btn-danger'><i class='fa fa-trash'></i></button><button id='noteBtn' class='btn btn-success'>Add Note</button><button data-id='" + data[i]._id + "' id='viewNotes' class='btn btn-info'>Notes</button></li><li id='link' class='list-group-item'><a target='_blank' href=" + data[i].link + ">Click Here to Read the Article</a></li></ul>");
 			}else{
-				$("#saved").append("<ul id='articleList'><li id='"+data[i]._id+"' class='title list-group-item active' data-id='" + data[i]._id + "'>" + data[i].title + "<button id='deleteBtn' class='btn btn-danger'><i class='fa fa-trash'></i></button><button id='noteBtn' class='btn btn-success'>Add Note</button></li><li id='link' class='list-group-item'>" + data[i].link + "</li></ul>");
+				$("#saved").append("<ul id='articleList'><li id='"+data[i]._id+"' class='title list-group-item active' data-id='" + data[i]._id + "'>" + data[i].title + "<button id='deleteBtn' class='btn btn-danger'><i class='fa fa-trash'></i></button><button id='noteBtn' class='btn btn-success'>Add Note</button></li><li id='link' class='list-group-item'><a target='_blank' href=" + data[i].link + ">Click Here to Read the Article</a></li></ul>");
 			}
             
         }
@@ -32,9 +32,39 @@ $( document ).ready(function() {
 		// });
 
     	// var noteId = $(this).parent().attr('data-id');
-    	$(".save-modal-title").text('Notes For Article ' + noteId);
+    	$(".save-modal-title").text('Save Notes For Article ' + noteId);
     	$("#saveNote").attr('data-id', noteId);
   	    $("#save").show();
+	});
+
+	$(document).on("click", "#viewNotes", function() {
+		var artId = $(this).attr('data-id');
+		console.log(artId)
+    	$.get("/articles/" + artId, function(data) {
+		  console.log(data);
+		  $("#notes").empty();
+		  for(var i = 0; i < data.note.length; i++){
+			var xbtn = $("<button data-id='"+data.note[i]._id+"' id='xbtn' class='closeBtn btn btn-danger'>X</button>");
+			let noteDiv = $("<div class='note'>"+data.note[i].note+"</div>");
+			noteDiv.append(xbtn);
+			$("#notes").append(noteDiv);
+		  }
+		//   if (data.note == undefined) {
+		//   	$("#notes").text('No notes for this article.');
+		//   }else{
+		  	
+		//   		var xbtn = $("<button data-id='"+data.note._id+"' id='xbtn' class='closeBtn btn btn-danger'>X</button>");
+		//   		$("#notes").html(data.note.note);
+		//   		$("#notes").append(xbtn);
+		  	
+		//   }
+		 
+		});
+
+    	var noteId = $(this).parent().attr('data-id');
+    	$(".notes-modal-title").text('View Notes For Article ' + noteId);
+    	$("#saveNote").attr('data-id', noteId);
+  	    $("#notesModal").show();
 	});
 
 	$(document).on("click", ".closeBtn", function() {
