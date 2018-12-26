@@ -211,11 +211,24 @@ app.delete("/delete:id", function(req, res) {
 });
 
 app.delete("/noteDelete:id", function(req, res) {
-  console.log(req.params.id);  var id = req.params.id.split(":")[1];
+  console.log('note id')
+  console.log(req.params.id);  
+  var id = req.params.id.split(":")[1];
+  console.log(id)
+  console.log('data id')
+  console.log(req.body.article)
 
   db.Note.deleteOne({_id: id})
     .then(function(dbNote) {
       console.log('deletNote has been called')
+    })
+
+  db.Saved.update( {_id: req.body.article}, 
+    { $pullAll: {note: [id] }})
+    .then(function(note){
+      console.log('note removed')})
+    .catch(function(err){
+      console.log(err)
     })
 });
 

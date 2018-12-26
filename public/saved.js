@@ -5,7 +5,10 @@ $( document ).ready(function() {
 		console.log(data)
         $("#saved").empty();
         for (var i = 0; i < data.length; i++) {
-			if(data[i].note.length > 0){
+			if(data[i].note[0] != null){
+				console.log('note');
+				console.log(data[i].note)
+				console.log(data[i].note.length)
 				$("#saved").append("<ul id='articleList'><li id='"+data[i]._id+"' class='title list-group-item active' data-id='" + data[i]._id + "'>" + data[i].title + "<button id='deleteBtn' class='btn btn-danger'><i class='fa fa-trash'></i></button><button id='noteBtn' class='btn btn-success'>Add Note</button><button data-id='" + data[i]._id + "' id='viewNotes' class='btn btn-info'>Notes</button></li><li id='link' class='list-group-item'><a target='_blank' href=" + data[i].link + ">Click Here to Read the Article</a></li></ul>");
 			}else{
 				$("#saved").append("<ul id='articleList'><li id='"+data[i]._id+"' class='title list-group-item active' data-id='" + data[i]._id + "'>" + data[i].title + "<button id='deleteBtn' class='btn btn-danger'><i class='fa fa-trash'></i></button><button id='noteBtn' class='btn btn-success'>Add Note</button></li><li id='link' class='list-group-item'><a target='_blank' href=" + data[i].link + ">Click Here to Read the Article</a></li></ul>");
@@ -16,22 +19,7 @@ $( document ).ready(function() {
 
     $(document).on("click", "#noteBtn", function() {
     	var noteId = $(this).parent().attr('data-id');
-    	// console.log(noteId);
-    	// $.get("/articles/" + noteId, function(data) {
-		//   console.log(data);
-		//   if (data.note == undefined) {
-		//   	$("#notes").text('No notes for this article.');
-		//   }else{
-		  	
-		//   		var xbtn = $("<button data-id='"+data.note._id+"' id='xbtn' class='closeBtn btn btn-danger'>X</button>");
-		//   		$("#notes").html(data.note.note);
-		//   		$("#notes").append(xbtn);
-		  	
-		//   }
-		 
-		// });
 
-    	// var noteId = $(this).parent().attr('data-id');
     	$(".save-modal-title").text('Save Notes For Article ' + noteId);
     	$("#saveNote").attr('data-id', noteId);
 		$("#save").show();
@@ -40,6 +28,15 @@ $( document ).ready(function() {
 
 	$(document).on("click", "#viewNotes", function() {
 		var artId = $(this).attr('data-id');
+
+		var isStored = localStorage.getItem("currentArticle");
+		if (isStored != null) {
+		  localStorage.removeItem("currentArticle");
+		}
+		// currentArticle = this.value;
+		// console.log(currentArticle);
+		localStorage.setItem("currentArticle", artId);
+
 		console.log(artId)
     	$.get("/articles/" + artId, function(data) {
 		  console.log(data);
@@ -50,15 +47,6 @@ $( document ).ready(function() {
 			noteDiv.append(xbtn);
 			$("#notes").append(noteDiv);
 		  }
-		//   if (data.note == undefined) {
-		//   	$("#notes").text('No notes for this article.');
-		//   }else{
-		  	
-		//   		var xbtn = $("<button data-id='"+data.note._id+"' id='xbtn' class='closeBtn btn btn-danger'>X</button>");
-		//   		$("#notes").html(data.note.note);
-		//   		$("#notes").append(xbtn);
-		  	
-		//   }
 		 
 		});
 
@@ -129,14 +117,24 @@ $( document ).ready(function() {
 	});
 
 	$(document).on("click", "#xbtn", function() {
-    	var artId = $(this).attr('data-id');
-		
+		var currentArticle = localStorage.getItem("currentArticle");
+		console.log(currentArticle)
+
+		var noteId = $(this).attr('data-id');
+		// var artId = $()
+		// console.log($(this).parent().children('.note'))
 		$("#noteDeleted").show();
-		setTimeout(function(){ $("#noteDeleted").hide(); }, 3000);
+		setTimeout(function(){ $("#noteDeleted").hide(); window.location.reload();
+		}, 3000);
+
+		// db.Article.update( {cn: req.params.name}, { $pullAll: {uid: [req.params.deleteUid] } } )
 
     	$.ajax({
 		    method: "DELETE",
-		    url: "/noteDelete:" + artId
+			url: "/noteDelete:" + noteId,
+			data: {
+		    	article : currentArticle
+		    }
 		})
 		// With that done, add the note information to the page
 		.then(function(data) {
