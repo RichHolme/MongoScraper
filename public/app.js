@@ -66,6 +66,9 @@ $(document).on("click", "#saveBtn", function() {
   var div = $(this).parent().parent();
   var article = {};
 
+  $("#saveArticle").show();
+	setTimeout(function(){ $("#saveArticle").hide(); }, 3000);
+
   div.each(function(index, value) {  
     console.log(div)
     // console.log($(value).children)

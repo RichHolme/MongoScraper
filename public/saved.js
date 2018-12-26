@@ -34,7 +34,8 @@ $( document ).ready(function() {
     	// var noteId = $(this).parent().attr('data-id');
     	$(".save-modal-title").text('Save Notes For Article ' + noteId);
     	$("#saveNote").attr('data-id', noteId);
-  	    $("#save").show();
+		$("#save").show();
+		  
 	});
 
 	$(document).on("click", "#viewNotes", function() {
@@ -99,6 +100,9 @@ $( document ).ready(function() {
 			if(!$("#"+artId).find('#viewNotes').length){
 				$("#"+artId).append("<button data-id='" + artId + "' id='viewNotes' class='btn btn-info'>Notes</button>")
 			}
+
+			$("#noteAdded").show();
+			setTimeout(function(){ $("#noteAdded").hide(); }, 3000);
 			// $('#elemId').length
 			// $("#"+artId).append("<button data-id='" + artId + "' id='viewNotes' class='btn btn-info'>Notes</button>")
 		})
@@ -107,7 +111,11 @@ $( document ).ready(function() {
 	$(document).on("click", "#deleteBtn", function() {
     	var artId = $(this).parent().attr('data-id');
     	// console.log(artId);
-    	$(this).parent().parent().hide();
+		$(this).parent().parent().hide();
+		
+		$("#articleDeleted").show();
+		setTimeout(function(){ $("#articleDeleted").hide(); }, 3000);
+
     	$.ajax({
 		    method: "DELETE",
 		    url: "/delete:" + artId
@@ -115,14 +123,17 @@ $( document ).ready(function() {
 		// With that done, add the note information to the page
 		.then(function(data) {
 
-		    console.log('deleted');
+			console.log('deleted');
 		    
 		})
 	});
 
 	$(document).on("click", "#xbtn", function() {
     	var artId = $(this).attr('data-id');
-  
+		
+		$("#noteDeleted").show();
+		setTimeout(function(){ $("#noteDeleted").hide(); }, 3000);
+
     	$.ajax({
 		    method: "DELETE",
 		    url: "/noteDelete:" + artId
