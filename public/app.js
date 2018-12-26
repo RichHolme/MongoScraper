@@ -41,7 +41,7 @@ $(document).on("click", "#scrapeBtn", function() {
 
     // $("#myModal").modal('show')
     // $('#myModal').modal('show')
-    $(".modal").show();
+    $("#countModal").show();
     // $('#myModal').modal('show');s
 
     // setTimeout(function() {
