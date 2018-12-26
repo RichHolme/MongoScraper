@@ -2,11 +2,11 @@ body {
   overflow-x: hidden;
  }
 
- #modaltxt{
-   text-align: center;
-   font-size: 24px;
-   margin-top: 3%;
- }
+#modaltxt{
+  text-align: center;
+  font-size: 24px;
+  margin-top: 3%;
+}
 
 .note{
   margin-top: 5%;
@@ -22,12 +22,7 @@ body {
   margin-right: auto;*/
   padding-top: 5%;
 }
-#articles {
-  /*display: inline-block;
-  overflow: auto;
-  width: 60%;
-  height: 700px;*/
-}
+
 #notes {
   float: right;
   width: 30%;
@@ -45,14 +40,6 @@ textarea {
   height: 200px;
   font-size: 18px;
 }
-/* #backgroundImg{ */
-  /* margin: auto;
-  width: 100%;
-  height: 100%;
-  /* margin-bottom: 30px; */
-  /* border: solid 1px black; */
-  /* box-shadow: 10px 5px 20px 2px lightslategrey; */ 
-/* }  */
 
 #titleHead{
   font-size: 60px;
@@ -70,7 +57,7 @@ textarea {
   /* color: white; */
   font-family: "Cormorant SC";
   height: 500px;
-  box-shadow: 10px 5px 20px 2px lightslategrey;
+  box-shadow: 0px 0px 20px 0px lightslategrey;
 }
 
 #articleList{
@@ -129,6 +116,7 @@ textarea {
 
 .navbar{
   padding: 1.2rem 1.2rem !important;
+  background-color: white !important;
 }
 
 .pageLogo{
