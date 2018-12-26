@@ -5,7 +5,12 @@ $( document ).ready(function() {
 		console.log(data)
         $("#saved").empty();
         for (var i = 0; i < data.length; i++) {
-          $("#saved").append("<ul id='articleList'><li id='title' class='list-group-item active' data-id='" + data[i]._id + "'>" + data[i].title + "<button id='deleteBtn' class='btn btn-danger'><i class='fa fa-trash'></i></button><button id='noteBtn' class='btn btn-success'>Add Note</button></li><li id='link' class='list-group-item'>" + data[i].link + "</li></ul>");
+			if(data[i].note.length > 0){
+				$("#saved").append("<ul id='articleList'><li id='"+data[i]._id+"' class='title list-group-item active' data-id='" + data[i]._id + "'>" + data[i].title + "<button id='deleteBtn' class='btn btn-danger'><i class='fa fa-trash'></i></button><button id='noteBtn' class='btn btn-success'>Add Note</button><button data-id='" + data[i]._id + "' id='viewNotes' class='btn btn-info'>Notes</button></li><li id='link' class='list-group-item'>" + data[i].link + "</li></ul>");
+			}else{
+				$("#saved").append("<ul id='articleList'><li id='"+data[i]._id+"' class='title list-group-item active' data-id='" + data[i]._id + "'>" + data[i].title + "<button id='deleteBtn' class='btn btn-danger'><i class='fa fa-trash'></i></button><button id='noteBtn' class='btn btn-success'>Add Note</button></li><li id='link' class='list-group-item'>" + data[i].link + "</li></ul>");
+			}
+            
         }
   	});
 
@@ -58,7 +63,9 @@ $( document ).ready(function() {
 			
 			// $("#")<button id='noteBtn' class='btn btn-success'>Add Note</button>
 			// console.log('finished');
-			$("#title").attr("data-id", artId).append("<button id='viewNotes' class='btn btn-info'>Notes</button>")
+			console.log('adding btn')
+			console.log(artId)
+			$("#"+artId).append("<button data-id='" + artId + "' id='viewNotes' class='btn btn-info'>Notes</button>")
 		})
 	});
 
