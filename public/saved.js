@@ -65,7 +65,12 @@ $( document ).ready(function() {
 			// console.log('finished');
 			console.log('adding btn')
 			console.log(artId)
-			$("#"+artId).append("<button data-id='" + artId + "' id='viewNotes' class='btn btn-info'>Notes</button>")
+			console.log($("#"+artId).find('#viewNotes').length)
+			if(!$("#"+artId).find('#viewNotes').length){
+				$("#"+artId).append("<button data-id='" + artId + "' id='viewNotes' class='btn btn-info'>Notes</button>")
+			}
+			// $('#elemId').length
+			// $("#"+artId).append("<button data-id='" + artId + "' id='viewNotes' class='btn btn-info'>Notes</button>")
 		})
 	});
 
