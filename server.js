@@ -12,10 +12,15 @@ var cheerio = require("cheerio");
 // Require all models
 var db = require("./models");
 
+var path = require('path')
+var favicon = require('serve-favicon');
+
 var PORT = process.env.PORT || 8080;
 
 // Initialize Express
 var app = express();
+
+app.use(favicon(path.join(__dirname,'public', 'images', 'text-lines.png')));
 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
